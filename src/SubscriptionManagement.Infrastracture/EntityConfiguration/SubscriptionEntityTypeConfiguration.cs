@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SubscriptionManagement.Domain;
-using SubscriptionManagement.Domain.Entities;
+using SubscriptionManagement.Domain.UserAggregate;
 
 namespace SubscriptionManagement.Infrastructure.EntityConfiguration;
 

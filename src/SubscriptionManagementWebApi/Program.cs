@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using SubscriptionManagement.Domain;
 using SubscriptionManagement.Infrastructure.EntityConfiguration;
 using SubscriptionManagement.Infrastructure.Repositories;
 

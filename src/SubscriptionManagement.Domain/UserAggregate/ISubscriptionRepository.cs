@@ -1,6 +1,4 @@
-﻿using SubscriptionManagement.Domain.Entities;
-
-namespace SubscriptionManagement.Infrastructure.Repositories;
+﻿namespace SubscriptionManagement.Domain.UserAggregate;
 
 public interface ISubscriptionRepository
 {

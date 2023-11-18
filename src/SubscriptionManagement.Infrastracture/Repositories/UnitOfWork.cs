@@ -1,4 +1,5 @@
-﻿using SubscriptionManagement.Domain.Repositories;
+﻿using SubscriptionManagement.Domain;
+using SubscriptionManagement.Domain.UserAggregate;
 using SubscriptionManagement.Infrastructure.EntityConfiguration;
 
 namespace SubscriptionManagement.Infrastructure.Repositories;

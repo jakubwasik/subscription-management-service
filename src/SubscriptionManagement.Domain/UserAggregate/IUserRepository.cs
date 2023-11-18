@@ -1,7 +1,4 @@
-﻿using System;
-using SubscriptionManagement.Domain.Entities;
-
-namespace SubscriptionManagement.Domain.Repositories;
+﻿namespace SubscriptionManagement.Domain.UserAggregate;
 
 public interface IUserRepository
 {

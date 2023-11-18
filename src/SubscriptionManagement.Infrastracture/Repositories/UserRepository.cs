@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SubscriptionManagement.Domain.Entities;
-using SubscriptionManagement.Domain.Repositories;
+using SubscriptionManagement.Domain.UserAggregate;
 using SubscriptionManagement.Infrastructure.EntityConfiguration;
 
 namespace SubscriptionManagement.Infrastructure.Repositories

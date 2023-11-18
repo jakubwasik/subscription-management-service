@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SubscriptionManagement.Domain.Entities;
+using SubscriptionManagement.Domain.UserAggregate;
 
 namespace SubscriptionManagement.Infrastructure.EntityConfiguration;
 

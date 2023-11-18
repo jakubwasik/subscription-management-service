@@ -1,6 +1,6 @@
-﻿using SubscriptionManagement.Domain.Repositories;
+﻿using SubscriptionManagement.Domain.UserAggregate;
 
-namespace SubscriptionManagement.Infrastructure.Repositories;
+namespace SubscriptionManagement.Domain;
 
 public interface IUnitOfWork: IDisposable
 {
