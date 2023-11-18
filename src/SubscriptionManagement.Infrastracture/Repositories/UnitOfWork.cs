@@ -7,14 +7,12 @@ namespace SubscriptionManagement.Infrastructure.Repositories;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
-    public ISubscriptionRepository SubscriptionRepository { get; }
     public IUserRepository UserRepository { get; }
     private bool _disposed;
 
     public UnitOfWork(ApplicationDbContext context)
     {
         _context = context;
-        SubscriptionRepository = new SubscriptionRepository(context);
         UserRepository = new UserRepository(context);
     }
 

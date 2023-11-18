@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SubscriptionManagement.Domain\SubscriptionManagement.Domain.csproj" />
     <ProjectReference Include="..\SubscriptionManagement.Infrastracture\SubscriptionManagement.Infrastructure.csproj" />
   </ItemGroup>
