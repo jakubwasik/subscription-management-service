@@ -13,7 +13,7 @@ Service can be run with command:
 cd src/ && docker compose up
 ```
 
-Above command spins up two containers: `mssql` and `api`. Api is accessible from: http://localhost:9000/swagger/index.html 
+Above command spins up two containers: `mssql` and `api`. Api is accessible on: http://localhost:9000/swagger/index.html 
 
 In order to run from VS, run sql server with command:
 
@@ -21,7 +21,7 @@ In order to run from VS, run sql server with command:
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-and then F5 in VS.  Api is accessible from: https://localhost:7051/swagger/index.html
+and then F5 in VS.  Api is accessible on: https://localhost:7051/swagger/index.html
 
 
 ## Domain Assumptions and Rationale
