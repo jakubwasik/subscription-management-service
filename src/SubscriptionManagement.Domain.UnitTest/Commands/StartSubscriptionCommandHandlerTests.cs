@@ -1,11 +1,7 @@
 ﻿using NSubstitute;
-using SubscriptionManagement.Domain;
 using SubscriptionManagement.Domain.Commands;
-using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 using SubscriptionManagement.Domain.UserAggregate;
-using Xunit;
 
 namespace SubscriptionManagement.Domain.UnitTest.Commands
 {

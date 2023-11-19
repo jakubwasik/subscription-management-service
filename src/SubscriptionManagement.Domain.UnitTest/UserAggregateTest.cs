@@ -40,6 +40,7 @@ namespace SubscriptionManagement.Domain.UnitTest
             var user = new User() { Name = "test", Email = "test@gmail.com", Id = 1 };
 
             //Act
+            user.AddSubscription(SubscriptionType.Basic);
             var ex = Assert.Throws<InvalidOperationException>(() => user.AddSubscription(SubscriptionType.Basic));
 
             // Assert

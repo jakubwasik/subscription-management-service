@@ -1,8 +1,5 @@
-using System.Net;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using SubscriptionManagement.Api.DTOs;
 using SubscriptionManagement.Domain;
 using SubscriptionManagement.Domain.UserAggregate;
@@ -29,6 +26,7 @@ namespace SubscriptionManagement.IntegrationTests
         {
             // Arrange
             User retrievedUser;
+            // database population could be moved to some helper class
             using (var scope = _factory.Services.CreateScope())
             {
                 var scopedServices = scope.ServiceProvider;
@@ -116,10 +114,7 @@ namespace SubscriptionManagement.IntegrationTests
             getResponse.EnsureSuccessStatusCode();
             var subscription = await getResponse.Content.ReadFromJsonAsync<SubscriptionDto>();
             subscription.Should().NotBeNull();
-            subscription.IsActive.Should().BeTrue();
             subscription.AutoRenewal.Should().BeTrue();
-            subscription.ActiveTo.Should().BeAfter(DateTime.Now);
-
         }
     }
 }

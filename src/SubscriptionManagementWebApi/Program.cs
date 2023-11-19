@@ -1,4 +1,3 @@
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionManagement.Domain;
 using SubscriptionManagement.Infrastructure;
