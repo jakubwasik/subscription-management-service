@@ -37,6 +37,7 @@ and then F5 in VS.  Api is accessible on: https://localhost:7051/swagger/index.h
 - Soultion has both some samples of `Integration Tests` and `Unit Test`
   - `Integration Test` spins up docker container with db for the whole test suite.
     - rationale: to be as close production implementation as possible
+- Decided to expose one `Patch` endpoint with action in payload instead of Start/Stop endpoints to be REST compliant
 
 
 ## TODO
