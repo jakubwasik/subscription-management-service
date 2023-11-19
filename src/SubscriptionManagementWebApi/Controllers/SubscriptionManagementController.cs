@@ -54,7 +54,7 @@ namespace SubscriptionManagement.Api.Controllers
             }
 
             // Note: this is a simplified version of mapping, for simplicity AutoMapper is not used here
-            return Ok(new SubscriptionDto(subscription));
+            return Ok(Mapper.ToDto(subscription));
         }
     }
 }

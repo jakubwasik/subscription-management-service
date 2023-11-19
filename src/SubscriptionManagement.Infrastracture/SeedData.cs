@@ -1,4 +1,5 @@
-﻿using SubscriptionManagement.Domain;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using SubscriptionManagement.Domain;
 using SubscriptionManagement.Domain.UserAggregate;
 using SubscriptionManagement.Infrastructure.EntityConfiguration;
 
@@ -11,30 +12,47 @@ public class SeedData
 {
     public async Task SeedAsync(ApplicationDbContext ctx)
     {
-        var names = new List<string> { "John", "Jane", "Jack", "Jill" };
         if (!ctx.Users.Any())
         {
-            var users = names.Select(x =>
-            {
-                var user = new User
-                {
-                    Name = x, Email = $"{x}@gmail.com"
-                };
-                return user;
-            }).ToList();
-
-            users[0].AddSubscription(SubscriptionType.Basic);
-            users[0].ActivateSubscription();
-            users[1].AddSubscription(SubscriptionType.Basic);
-            users[1].ActivateSubscription();
-            users[1].PauseSubscription();
-            ctx.Users.AddRange(users);
+            AddUserWithActiveSubscription(ctx, "John");
+            AddUserWithActiveSubscriptionWithoutAutoRenewal(ctx, "Jane");
+            AddUserWithoutSubscription(ctx, "Jack");
             await ctx.SaveChangesAsync();
         }
+    }
 
-        //var u = ctx.Users.Find(1);
-        //u.AddSubscription(SubscriptionType.Premium);
-        //u.ActivateSubscription();
-        //await ctx.SaveChangesAsync();
+    private static void AddUserWithActiveSubscription(ApplicationDbContext ctx, string username)
+    {
+        var user = new User
+        {
+            Name = username,
+            Email = $"{username}@gmail.com",
+        };
+        user.AddSubscription(SubscriptionType.Basic);
+        user.ActivateSubscription();
+        ctx.Users.Add(user);
+    }
+
+    private static void AddUserWithActiveSubscriptionWithoutAutoRenewal(ApplicationDbContext ctx, string username)
+    {
+        var user = new User
+        {
+            Name = username,
+            Email = $"{username}@gmail.com",
+        };
+        user.AddSubscription(SubscriptionType.Basic);
+        user.ActivateSubscription();
+        user.PauseSubscription();
+        ctx.Users.Add(user);
+    }
+
+    private static void AddUserWithoutSubscription(ApplicationDbContext ctx, string username)
+    {
+        var user = new User
+        {
+            Name = username,
+            Email = $"{username}@gmail.com",
+        };
+        ctx.Users.Add(user);
     }
 }

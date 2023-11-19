@@ -1,13 +1,14 @@
 ﻿namespace SubscriptionManagement.Domain.UserAggregate
 {
     /// <summary>
-    /// User Aggregate Root Entity, entry point for Subscription
+    /// User Aggregate Root Entity, entry point for Subscription.
+    /// todo: this class should be better encapsulated
     /// </summary>
     public class User
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public required string Email { get; init; } = string.Empty;
         public Subscription? Subscription { get; set; }
 
         public Subscription AddSubscription(SubscriptionType subscriptionType)

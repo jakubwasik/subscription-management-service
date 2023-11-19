@@ -16,7 +16,7 @@ public class StartSubscriptionCommandHandler : IRequestHandler<StartSubscription
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.UserId, includeSubscription: true);
         if (user == null)
         {
-            throw new Exception($"User with id {request.UserId} not found");
+            throw new InvalidOperationException($"User with id {request.UserId} not found");
         }
 
         if (user.Subscription == null)

@@ -89,7 +89,6 @@ namespace SubscriptionManagement.IntegrationTests
         public async Task ShouldBeAbleToStartSubscriptionIfUserAlreadyHaveOneInInactiveState()
         {
             // Arrange
-            // Arrange
             User retrievedUser;
             using (var scope = _factory.Services.CreateScope())
             {

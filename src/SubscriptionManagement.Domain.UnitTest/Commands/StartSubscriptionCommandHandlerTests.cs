@@ -20,7 +20,7 @@ namespace SubscriptionManagement.Domain.UnitTest.Commands
         public async Task HandlerShouldBeAbleToCreateSubscriptionIfNotExists()
         {
             // Arrange
-            var user = new User() { Name = "test", Id = 1 };
+            var user = new User() { Name = "test", Id = 1, Email = "test@gmail.com" };
             _unitOfWork.UserRepository
                 .GetByIdAsync(Arg.Any<int>(), includeSubscription: true)
                 .Returns(user);
@@ -37,7 +37,7 @@ namespace SubscriptionManagement.Domain.UnitTest.Commands
         public async Task SubscriptionShouldBeActiveWhenReceivedStartCommand()
         {
             // Arrange
-            var user = new User() { Name = "test", Id = 1 };
+            var user = new User() { Name = "test", Id = 1, Email = "test@gmail.com" };
             _unitOfWork.UserRepository
                 .GetByIdAsync(Arg.Any<int>(), includeSubscription: true)
                 .Returns(user);
@@ -60,7 +60,7 @@ namespace SubscriptionManagement.Domain.UnitTest.Commands
             var startSubscriptionCommand = new StartSubscriptionCommand(userId: 1);
 
             // Act - Assert
-            Assert.ThrowsAsync<Exception>(async () => await _sut.Handle(startSubscriptionCommand, CancellationToken.None));
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await _sut.Handle(startSubscriptionCommand, CancellationToken.None));
             await _unitOfWork.DidNotReceive().SaveChangesAsync();
         }
     }
