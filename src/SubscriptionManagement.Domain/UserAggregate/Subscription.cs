@@ -8,6 +8,7 @@ public class Subscription
     {
         SubscriptionType = subscriptionType;
         AutoRenewal = true;
+        //Note: this is not the best way to set the date. Real implementation should use TimeProvider or time abstraction
         ActiveTo = DateTimeOffset.UtcNow.AddMonths(SubscriptionPeriod);
     }
 

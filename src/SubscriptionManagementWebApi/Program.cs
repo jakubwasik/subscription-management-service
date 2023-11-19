@@ -38,7 +38,10 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await context.Database.MigrateAsync();
-    await new SeedData().SeedAsync(context);
+    if (app.Environment.IsDevelopment())
+    {
+        await new SeedData().SeedAsync(context);
+    }
 }
 
 app.Run();

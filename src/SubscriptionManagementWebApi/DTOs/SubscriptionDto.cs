@@ -7,7 +7,7 @@ public class SubscriptionDto
     public bool IsActive { get; }
     public bool AutoRenewal { get; }
     public string SubscriptionType { get; }
-    public DateTimeOffset ActiveTo { get; }
+    public DateTime ActiveTo { get; }
 
     public SubscriptionDto(Subscription subscription)
     {

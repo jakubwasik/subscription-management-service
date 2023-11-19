@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SubscriptionManagement.IntegrationTests": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:62275;http://localhost:62276"
+    }
+  }
+}

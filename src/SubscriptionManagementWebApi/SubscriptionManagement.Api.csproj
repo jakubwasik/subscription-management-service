@@ -25,5 +25,7 @@
     <ProjectReference Include="..\SubscriptionManagement.Domain\SubscriptionManagement.Domain.csproj" />
     <ProjectReference Include="..\SubscriptionManagement.Infrastracture\SubscriptionManagement.Infrastructure.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<InternalsVisibleTo Include="SubscriptionManagement.IntegrationTests" />
+	</ItemGroup>
 </Project>

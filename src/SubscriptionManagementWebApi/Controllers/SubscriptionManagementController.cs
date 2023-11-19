@@ -7,7 +7,7 @@ using SubscriptionManagement.Domain.Queries;
 namespace SubscriptionManagement.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/users")]
+    [Route("api/v1/users/")]
     public class SubscriptionManagementController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -26,7 +26,7 @@ namespace SubscriptionManagement.Api.Controllers
         /// <param name="operation"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        [HttpPatch("/{userId:int}/subscription")]
+        [HttpPatch("{userId:int}/subscription")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,7 +43,7 @@ namespace SubscriptionManagement.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("/{userId:int}/subscription")]
+        [HttpGet("{userId:int}/subscription")]
         public async Task<ActionResult<SubscriptionDto>> GetSubscription(int userId)
         {
             // We're assuming here that authN & authZ middleware succeeded. That means user can access given subscription.
