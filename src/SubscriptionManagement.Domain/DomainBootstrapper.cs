@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SubscriptionManagement.Domain.Handlers;
+using SubscriptionManagement.Domain.Commands;
 
 namespace SubscriptionManagement.Domain;
 

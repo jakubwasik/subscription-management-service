@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using SubscriptionManagement.Domain.Commands;
 
-namespace SubscriptionManagement.Domain.Handlers;
+namespace SubscriptionManagement.Domain.Commands;
 
 public class StartSubscriptionCommandHandler : IRequestHandler<StartSubscriptionCommand>
 {
@@ -14,7 +13,7 @@ public class StartSubscriptionCommandHandler : IRequestHandler<StartSubscription
 
     public async Task Handle(StartSubscriptionCommand request, CancellationToken cancellationToken)
     {
-        var user = await _unitOfWork.UserRepository.GetByIdAsync(request.UserId);
+        var user = await _unitOfWork.UserRepository.GetByIdAsync(request.UserId, includeSubscription: true);
         if (user == null)
         {
             throw new Exception($"User with id {request.UserId} not found");

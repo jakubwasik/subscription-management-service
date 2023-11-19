@@ -13,9 +13,14 @@ namespace SubscriptionManagement.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<User?> GetByIdAsync(int userId)
+        public async Task<User?> GetByIdAsync(int userId, bool includeSubscription = false)
         {
-            return await _context.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            IQueryable<User> query = _context.Users;
+            if (includeSubscription)
+            {
+                query = query.Include(user => user.Subscription);
+            }
+            return await query.FirstOrDefaultAsync(user => user.Id == userId);
         }
 
         public User AddUser(User newUser)

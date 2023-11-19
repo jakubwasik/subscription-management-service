@@ -10,10 +10,6 @@ class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("Users");
         builder.HasKey(x => x.Id);
-        // One - to - one relationship between User and Subscription with shadow foreign key
-        builder.HasOne<Subscription>()
-            .WithOne()
-            .HasForeignKey<Subscription>(subscription => subscription.Id)
-            .IsRequired(false);
+        // One-to-one relationship between User and Subscription with shadow foreign key
     }
 }

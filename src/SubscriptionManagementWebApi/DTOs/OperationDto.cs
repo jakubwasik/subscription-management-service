@@ -1,4 +1,4 @@
-namespace SubscriptionManagement.Api.Dto;
+namespace SubscriptionManagement.Api.DTOs;
 
 public class OperationDto
 {

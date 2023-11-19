@@ -1,7 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SubscriptionManagement.Api.Dto;
+using SubscriptionManagement.Api.DTOs;
 using SubscriptionManagement.Domain.Commands;
+using SubscriptionManagement.Domain.Queries;
 
 namespace SubscriptionManagement.Api.Controllers
 {
@@ -18,7 +19,13 @@ namespace SubscriptionManagement.Api.Controllers
             _logger = logger;
         }
 
-
+        /// <summary>
+        /// Endpoint for managing user's subscription (REST compliant)
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="operation"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         [HttpPatch("/{userId:int}/subscription")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +41,20 @@ namespace SubscriptionManagement.Api.Controllers
             };
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet("/{userId:int}/subscription")]
+        public async Task<ActionResult<SubscriptionDto>> GetSubscription(int userId)
+        {
+            // We're assuming here that authN & authZ middleware succeeded. That means user can access given subscription.
+            var subscription = await _mediator.Send(new GetSubscriptionQuery(userId));
+            if (subscription == null)
+            {
+                return NotFound();
+            }
+
+            // Note: this is a simplified version of mapping, for simplicity AutoMapper is not used here
+            return Ok(new SubscriptionDto(subscription));
         }
     }
 }

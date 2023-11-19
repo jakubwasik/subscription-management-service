@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using SubscriptionManagement.Domain;
 using SubscriptionManagement.Infrastructure;
 using SubscriptionManagement.Infrastructure.EntityConfiguration;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -36,6 +38,7 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await context.Database.MigrateAsync();
+    await new SeedData().SeedAsync(context);
 }
 
 app.Run();

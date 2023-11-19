@@ -1,6 +1,7 @@
-namespace SubscriptionManagement.Api.Dto;
+namespace SubscriptionManagement.Api.DTOs;
 
-public enum ActionType {
+public enum ActionType
+{
     Start,
     Stop
 }

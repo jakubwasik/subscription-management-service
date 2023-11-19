@@ -12,8 +12,8 @@ using SubscriptionManagement.Infrastructure.EntityConfiguration;
 namespace SubscriptionManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231118183214_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20231119104727_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,10 +25,13 @@ namespace SubscriptionManagement.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SubscriptionManagement.Domain.Entities.Subscription", b =>
+            modelBuilder.Entity("SubscriptionManagement.Domain.UserAggregate.Subscription", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTimeOffset>("ActiveTo")
                         .HasColumnType("datetimeoffset");
@@ -36,19 +39,22 @@ namespace SubscriptionManagement.Infrastructure.Migrations
                     b.Property<bool>("AutoRenewal")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset>("LastActivated")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("SubscriptionType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Subscriptions", (string)null);
                 });
 
-            modelBuilder.Entity("SubscriptionManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("SubscriptionManagement.Domain.UserAggregate.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,29 +70,22 @@ namespace SubscriptionManagement.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SubscriptionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SubscriptionId");
 
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("SubscriptionManagement.Domain.Entities.Subscription", b =>
+            modelBuilder.Entity("SubscriptionManagement.Domain.UserAggregate.Subscription", b =>
                 {
-                    b.HasOne("SubscriptionManagement.Domain.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("SubscriptionManagement.Domain.Entities.Subscription", "Id");
+                    b.HasOne("SubscriptionManagement.Domain.UserAggregate.User", null)
+                        .WithOne("Subscription")
+                        .HasForeignKey("SubscriptionManagement.Domain.UserAggregate.Subscription", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("SubscriptionManagement.Domain.Entities.User", b =>
+            modelBuilder.Entity("SubscriptionManagement.Domain.UserAggregate.User", b =>
                 {
-                    b.HasOne("SubscriptionManagement.Domain.Entities.Subscription", "Subscription")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionId");
-
                     b.Navigation("Subscription");
                 });
 #pragma warning restore 612, 618

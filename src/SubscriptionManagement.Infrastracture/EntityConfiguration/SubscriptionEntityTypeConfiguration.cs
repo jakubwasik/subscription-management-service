@@ -15,5 +15,9 @@ class SubscriptionEntityTypeConfiguration : IEntityTypeConfiguration<Subscriptio
         builder.Property(s => s.SubscriptionType)
             .HasConversion(new EnumToStringConverter<SubscriptionType>());
         builder.Ignore(subscription => subscription.IsActive);
+        // One-to-one relationship between User and Subscription with shadow foreign key
+        builder.HasOne<User>()
+            .WithOne(user => user.Subscription)
+            .HasForeignKey<Subscription>("UserId").IsRequired();
     }
 }
